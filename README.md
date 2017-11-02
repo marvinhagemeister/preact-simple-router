@@ -40,6 +40,25 @@ export default function App() {
 }
 ```
 
+Linking to other routes (the `url` must be **absolute**!):
+
+```jsx
+import { h } from "preact";
+import { Link}  from "preact-simple-router";
+
+export default function App() {
+  return <div>
+    <Link
+      href="/blog/my-first-post"
+      class="my-link"
+      activeClass="my-active-link"
+     >
+      My First Blog Post
+    </Link>
+  </div>;
+}
+```
+
 ## License
 
 `MIT`, see [License file](LICENSE.md).
