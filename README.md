@@ -23,8 +23,6 @@ yarn add preact preact-simple-router
 ```jsx
 import { h } from "preact";
 import { Router}  from "preact-simple-router";
-import Header from "../Header";
-import Footer from "../Footer";
 
 const routes = {
   "/": () => import("./MyHomeComponent"),
