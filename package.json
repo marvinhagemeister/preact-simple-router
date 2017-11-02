@@ -1,27 +1,38 @@
 {
-  "name": "typescript-starter",
+  "name": "preact-simple-router",
   "version": "0.0.1",
-  "description": "typescript boilerplate project",
-  "main": "dist/index.js",
+  "description": "Simple router for preact",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/es/index.d.ts",
   "author": "Marvin Hagemeister <marvin@marvinhagemeister.de>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:marvinhagemeister/preact-simple-router.git"
+  },
   "scripts": {
     "cleanup": "rimraf dist/",
     "lint": "tslint 'src/**/*.ts' 'src/**/*.tsx'",
     "watch": "tsc -p tsconfig.build.json -w",
-    "build": "npm run cleanup && tsc -p tsconfig.build.json",
+    "build":
+      "npm run cleanup && tsc -p tsconfig.build-cjs.json && tsc -p tsconfig.build-es.json",
     "test": "tsc -p tsconfig.test.json && jest",
     "test-watch": "npm t -- --watch",
     "coverage": "npm t -- --coverage",
     "prepublishOnly": "npm run lint && npm t && npm run build",
     "precommit": "lint-staged"
   },
-  "dependencies": {},
+  "dependencies": {
+    "preact-loadable": "^0.0.1",
+    "rlite-router": "^2.0.3"
+  },
   "devDependencies": {
     "@types/jest": "^21.1.4",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "lint-staged": "^4.0.4",
+    "preact": "^8.2.6",
     "prettier": "^1.6.1",
     "rimraf": "^2.6.1",
     "ts-jest": "^21.1.3",
@@ -29,6 +40,9 @@
     "tslint": "^5.7.0",
     "tslint-config-sevenval": "^0.6.3",
     "typescript": "^2.5.2"
+  },
+  "peerDependencies": {
+    "preact": "^8.2.6"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

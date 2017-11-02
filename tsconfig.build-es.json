@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "module": "es2015",
+    "outDir": "dist/es/"
+  },
+  "files": ["./typings/global.d.ts", "./src/index.ts"]
+}

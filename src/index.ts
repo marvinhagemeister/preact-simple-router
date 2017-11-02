@@ -1,2 +1,2 @@
-// tslint:disable-next-line
-console.log("hello world");
+export { default as Link } from "./Link";
+export { default as Router } from "./Router";

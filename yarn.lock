@@ -2149,6 +2149,14 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
+preact-loadable@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/preact-loadable/-/preact-loadable-0.0.1.tgz#2fe91fa3935dbd38041cbe7cd34b29b7d07ea348"
+
+preact@^8.2.6:
+  version "8.2.6"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-8.2.6.tgz#0028b426ef98fcca741a3c617ff5b813b9a947c7"
+
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
@@ -2376,6 +2384,10 @@ rimraf@2, rimraf@^2.5.1, rimraf@^2.6.1:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:
     glob "^7.0.5"
+
+rlite-router@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/rlite-router/-/rlite-router-2.0.3.tgz#326d6f08919b49a7a022af3f67f6e6c6064d36da"
 
 rxjs@^5.0.0-beta.11:
   version "5.5.0"

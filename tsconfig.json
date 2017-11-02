@@ -5,6 +5,8 @@
     "strict": true,
     "sourceMap": true,
     "pretty": true,
+    "jsx": "react",
+    "jsxFactory": "h",
     "outDir": "dist/",
     "declaration": true
   },
