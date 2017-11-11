@@ -15,8 +15,7 @@
     "cleanup": "rimraf dist/",
     "lint": "tslint 'src/**/*.ts' 'src/**/*.tsx'",
     "watch": "tsc -p tsconfig.build.json -w",
-    "build":
-      "npm run cleanup && tsc -p tsconfig.build-cjs.json && tsc -p tsconfig.build-es.json",
+    "build": "npm run cleanup && tsc -p tsconfig.build-cjs.json && tsc -p tsconfig.build-es.json",
     "test": "tsc -p tsconfig.test.json && jest",
     "test-watch": "npm t -- --watch",
     "coverage": "npm t -- --coverage",
@@ -25,6 +24,7 @@
   },
   "dependencies": {
     "preact-loadable": "^0.0.1",
+    "preact-server-renderer": "^0.2.1",
     "rlite-router": "^2.0.3"
   },
   "devDependencies": {

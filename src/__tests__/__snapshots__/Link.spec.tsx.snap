@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link should render active class 1`] = `
+"<a
+  href=\\"/\\"
+  class=\\"foo bar\\"
+></a>
+"
+`;
+
+exports[`Link should render active class 2`] = `
+"<a
+  href=\\"/foo\\"
+  class=\\"foo\\"
+></a>
+"
+`;
+
+exports[`Link should render exact active class 1`] = `
+"<a
+  href=\\"/\\"
+  class=\\"foo bar\\"
+></a>
+"
+`;
+
+exports[`Link should render exact active class 2`] = `
+"<a
+  href=\\"/bob/foo\\"
+  class=\\"foo\\"
+></a>
+"
+`;
