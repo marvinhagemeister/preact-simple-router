@@ -6,7 +6,12 @@ src/
 .editorconfig
 .npmignore
 .travis.yml
+.vscode/
 .gitignore
 .prettierrc
 tsconfig.json
+tsconfig.build-cjs.json
+tsconfig.build-es.json
+tsconfig.test.json
 tslint.json
+jest.config.js
