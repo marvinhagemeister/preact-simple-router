@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.5
+
+- Mac: Fix `cmd + click` beeing incorrectly captured
+
 ## 0.0.4
 
 - Fix TypeScript typings issue
