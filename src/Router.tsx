@@ -2,21 +2,20 @@ import { h, Component } from "preact";
 import Rlite, { RouteHandler } from "rlite-router";
 import { getUrl } from "./util";
 
-export type Comp = JSX.Element | Element | string | number | null;
 export type RouteFn = (
   params?: Record<string, any>,
   state?: any,
   url?: string,
-) => Promise<Comp>;
+) => Promise<any>;
 
 export interface Props {
   routes: Record<string, RouteFn>;
-  loading: (params?: Record<string, any>, state?: any, url?: string) => Comp;
-  error: (err: Error) => Comp;
+  loading: (params?: Record<string, any>, state?: any, url?: string) => any;
+  error: (err: Error) => any;
 }
 
 export interface State {
-  component?: Comp;
+  component?: any;
 }
 
 export default class Router extends Component<Props, State> {
