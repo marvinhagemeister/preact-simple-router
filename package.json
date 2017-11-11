@@ -23,7 +23,6 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "preact-loadable": "^0.0.1",
     "preact-server-renderer": "^0.2.1",
     "rlite-router": "^2.0.3"
   },

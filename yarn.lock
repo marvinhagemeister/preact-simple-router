@@ -2157,10 +2157,6 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-preact-loadable@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/preact-loadable/-/preact-loadable-0.0.1.tgz#2fe91fa3935dbd38041cbe7cd34b29b7d07ea348"
-
 preact-server-renderer@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/preact-server-renderer/-/preact-server-renderer-0.2.1.tgz#1153ec4b782bae6a410256e90999abd57529168c"

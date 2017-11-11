@@ -1,35 +1,24 @@
 import { h, Component } from "preact";
-import Loadable, { Props as LProps } from "preact-loadable";
 import Rlite, { RouteHandler } from "rlite-router";
+import { getUrl } from "./util";
 
-export interface Props extends Pick<LProps, "loading" | "error"> {
+export interface Props {
   routes: Record<string, any>;
-  onBoot?: () => any;
+  loading: () => JSX.Element;
+  error: (err: Error) => JSX.Element;
 }
 
 export interface State {
-  init: boolean;
-  component: any;
-}
-
-export function getUrl() {
-  return window.location.href.replace(window.location.origin, "");
+  component?: JSX.Element;
 }
 
 export default class Router extends Component<Props, State> {
-  static defaultProps = {
-    onBoot: () => undefined,
-    loading: () => "Loading...",
-  };
-
   private router: RouteHandler;
   public state: State;
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
-
     this.state = {
-      init: false,
       component: undefined,
     };
   }
@@ -38,17 +27,25 @@ export default class Router extends Component<Props, State> {
     const prepared: Record<string, any> = {};
     const { routes } = this.props;
 
-    let err: () => void = () => undefined;
+    let errCb: () => void = () => undefined;
     for (const url of Object.keys(routes)) {
-      const value = () => this.setState({ component: routes[url] });
+      const value = (...args: any[]) => {
+        this.setState({ component: this.props.loading() });
+        return routes[url](args)
+          .then((component: any) => this.setState({ component }))
+          .catch((err: Error) =>
+            this.setState({ component: this.props.error(err) }),
+          );
+      };
+
       if (url === "/404") {
-        err = value;
+        errCb = value;
       } else {
         prepared[url] = value;
       }
     }
 
-    this.router = Rlite(err, prepared);
+    this.router = Rlite(errCb, prepared);
     this.router(window.location.href);
 
     window.addEventListener("popstate", () => this.router(getUrl()));
@@ -57,15 +54,9 @@ export default class Router extends Component<Props, State> {
 
   render() {
     if (this.state.component === undefined) {
-      return this.props.onBoot!();
+      return null;
     }
 
-    return (
-      <Loadable
-        fn={this.state.component}
-        loading={this.props.loading}
-        error={this.props.error}
-      />
-    );
+    return this.state.component;
   }
 }

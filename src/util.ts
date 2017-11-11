@@ -4,3 +4,7 @@ export function isExternal(url: string) {
   }
   return new URL(url).hostname !== window.location.hostname;
 }
+
+export function getUrl() {
+  return window.location.href.replace(window.location.origin, "");
+}

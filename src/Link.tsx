@@ -1,6 +1,5 @@
 import { h, Component } from "preact";
-import { getUrl } from "./Router";
-import { isExternal } from "./util";
+import { isExternal, getUrl } from "./util";
 
 export interface Props {
   class?: string;
