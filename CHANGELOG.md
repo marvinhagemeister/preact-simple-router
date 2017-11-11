@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4
+
+- Fix TypeScript typings issue
+
 ## 0.0.3 (Pre-Release)
 
 - Various router fixes

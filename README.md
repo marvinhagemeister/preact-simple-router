@@ -25,10 +25,12 @@ import { h } from "preact";
 import { Router}  from "preact-simple-router";
 
 const routes = {
-  "/": () => import("./MyHomeComponent"),
-  "/about": () => import("./About"),
-  "/blog/:name": () => import("./MyBlogPost"),
-  "/404": () => import("../404"), // Will be automatically used as error route
+  "/": () => import("./MyHomeComponent").then(m => m.default()),
+  "/about": () => import("./About").then(m => m.default()),
+  // Passing :name to component
+  "/blog/:name": (args) => import("./MyBlogPost").then(m => m.default(args.name)),
+   // Will be automatically used as error route
+  "/404": () => import("../404").then(m => m.default()),
 };
 
 export default function App() {
