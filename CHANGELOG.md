@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.3 (Pre-Release)
+
+- Various router fixes
+
 ## 0.0.2 (Pre-Release) Refactor
 
 - `<Link>` only pushes to history when link differs from url bar
