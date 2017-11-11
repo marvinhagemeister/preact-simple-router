@@ -9,37 +9,33 @@ describe("Link", () => {
   let counter = 0;
   const handler = () => counter++;
 
-  beforeAll(() => {
-    counter = 0;
-    window.addEventListener("popstate", handler);
-  });
-
-  afterAll(() => window.removeEventListener("popstate", handler));
-
   beforeEach(() => {
     counter = 0;
+    window.addEventListener("popstate", handler);
     Object.defineProperty(window.location, "href", {
       writable: true,
       value: "/",
+    });
+    Object.defineProperty(window.location, "origin", {
+      writable: true,
+      value: "http://localhost/",
     });
     Object.defineProperty(window.location, "hostname", {
       writable: true,
       value: "localhost",
     });
-    Object.defineProperty(window.location, "protocol", {
-      writable: true,
-      value: "http",
-    });
 
     window.history.pushState = (data: any, title: any, url?: any) => {
-      window.location.href = url;
+      window.location.href = window.location.origin + url.slice(1);
     };
   });
+
+  afterEach(() => window.removeEventListener("popstate", handler));
 
   it("should navigate", () => {
     const root = mount(<Link href="/foo" />).simulate("click");
 
-    expect(window.location.href).toEqual("/foo");
+    expect(window.location.href).toEqual("http://localhost/foo");
     expect(counter).toEqual(1);
   });
 

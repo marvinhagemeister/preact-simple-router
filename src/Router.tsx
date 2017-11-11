@@ -2,14 +2,21 @@ import { h, Component } from "preact";
 import Rlite, { RouteHandler } from "rlite-router";
 import { getUrl } from "./util";
 
+export type Comp = JSX.Element | Element | string | number | null;
+export type RouteFn = (
+  params?: Record<string, any>,
+  state?: any,
+  url?: string,
+) => Promise<Comp>;
+
 export interface Props {
-  routes: Record<string, any>;
-  loading: () => JSX.Element;
-  error: (err: Error) => JSX.Element;
+  routes: Record<string, RouteFn>;
+  loading: (params?: Record<string, any>, state?: any, url?: string) => Comp;
+  error: (err: Error) => Comp;
 }
 
 export interface State {
-  component?: JSX.Element;
+  component?: Comp;
 }
 
 export default class Router extends Component<Props, State> {
@@ -30,8 +37,8 @@ export default class Router extends Component<Props, State> {
     let errCb: () => void = () => undefined;
     for (const url of Object.keys(routes)) {
       const value = (...args: any[]) => {
-        this.setState({ component: this.props.loading() });
-        return routes[url](args)
+        this.setState({ component: this.props.loading(...args) });
+        return routes[url](args[0], args[1], args[2])
           .then((component: any) => this.setState({ component }))
           .catch((err: Error) =>
             this.setState({ component: this.props.error(err) }),
@@ -57,6 +64,6 @@ export default class Router extends Component<Props, State> {
       return null;
     }
 
-    return this.state.component;
+    return this.state.component as any;
   }
 }

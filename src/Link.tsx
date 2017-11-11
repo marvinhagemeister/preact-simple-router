@@ -67,6 +67,7 @@ export default class Link extends Component<Props, State> {
       }
 
       e.preventDefault();
+
       window.history.pushState({}, "foo", this.props.href);
       window.dispatchEvent(new Event("popstate", { bubbles: true }));
     } else if (this.state.external) {
