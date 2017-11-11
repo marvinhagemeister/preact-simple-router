@@ -53,15 +53,17 @@ export default class Link extends Component<Props, State> {
     window.removeEventListener("popstate", this.update);
   }
 
-  onClick = (e: Event) => {
+  onClick = (e: KeyboardEvent | MouseEvent) => {
     // Only change history if the url has actually changes and the url
     // is not external
     if (this.props.href !== window.location.href && !this.state.external) {
       // Do nothing on ctrl+click and the like
       if (
-        (e instanceof KeyboardEvent &&
-          (e.ctrlKey || e.metaKey || e.altKey || e.shiftKey)) ||
-        (e instanceof MouseEvent && e.button !== 0)
+        e.ctrlKey ||
+        e.metaKey ||
+        e.altKey ||
+        e.shiftKey ||
+        (e as any).button !== 0
       ) {
         return;
       }
