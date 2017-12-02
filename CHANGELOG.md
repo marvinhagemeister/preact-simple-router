@@ -1,5 +1,9 @@
 # Changelog
 
+## next
+
+- Fix scroll position not reset when clicking on a `Link`
+
 ## 0.0.5
 
 - Mac: Fix `cmd + click` beeing incorrectly captured

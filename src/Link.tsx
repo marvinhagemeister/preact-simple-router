@@ -72,6 +72,7 @@ export default class Link extends Component<Props, State> {
 
       window.history.pushState({}, "foo", this.props.href);
       window.dispatchEvent(new Event("popstate", { bubbles: true }));
+      window.scrollTo(0, 0);
     } else if (this.state.external) {
       window.location.href = this.props.href;
     }
