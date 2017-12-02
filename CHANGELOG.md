@@ -1,6 +1,6 @@
 # Changelog
 
-## next
+## 0.0.6
 
 - Fix scroll position not reset when clicking on a `Link`
 
