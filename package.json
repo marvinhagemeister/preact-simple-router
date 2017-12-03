@@ -1,6 +1,6 @@
 {
   "name": "preact-simple-router",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Simple router for preact",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
