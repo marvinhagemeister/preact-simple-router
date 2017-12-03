@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.7
+
+- Add optional `onClick` handler for `Link`
+
 ## 0.0.6
 
 - Fix scroll position not reset when clicking on a `Link`

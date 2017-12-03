@@ -5,6 +5,7 @@ export interface Props {
   class?: string;
   target?: string;
   activeClass?: string;
+  onClick?: (e?: KeyboardEvent | MouseEvent) => void;
   href: string;
   children?: any;
   exact?: boolean;
@@ -75,6 +76,10 @@ export default class Link extends Component<Props, State> {
       window.scrollTo(0, 0);
     } else if (this.state.external) {
       window.location.href = this.props.href;
+    }
+
+    if (this.props.onClick !== undefined) {
+      this.props.onClick(e);
     }
   };
 
