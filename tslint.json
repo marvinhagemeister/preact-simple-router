@@ -1,6 +1,8 @@
 {
   "extends": "tslint-config-sevenval",
   "rules": {
-    "semicolon": false
+    "semicolon": false,
+    "curly": false,
+    "max-classes-per-file": false
   }
 }

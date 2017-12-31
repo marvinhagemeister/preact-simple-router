@@ -1,5 +1,4 @@
 import { h, Component } from "preact";
-import { isExternal, getUrl } from "./util";
 
 export interface Props {
   class?: string;
@@ -11,53 +10,11 @@ export interface Props {
   exact?: boolean;
 }
 
-export interface State {
-  current: string;
-  external: boolean;
-}
-
-export default class Link extends Component<Props, State> {
-  static defaultProps = {
-    exact: false,
-    class: "",
-    activeClass: "",
-  };
-
-  public state: State;
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      current: getUrl(),
-      external: isExternal(props.href),
-    };
-  }
-
-  componentWillReceiveProps(props: Props) {
-    if (props.href !== this.props.href) {
-      this.setState({ external: isExternal(props.href) });
-    }
-  }
-
-  update = () => {
-    this.setState({
-      current: getUrl(),
-      external: isExternal(this.props.href),
-    });
-  };
-
-  componentDidMount() {
-    window.addEventListener("popstate", this.update);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("popstate", this.update);
-  }
-
+export default class Link extends Component<Props, any> {
   onClick = (e: KeyboardEvent | MouseEvent) => {
-    // Only change history if the url has actually changes and the url
-    // is not external
-    if (this.props.href !== window.location.href && !this.state.external) {
+    const router = this.context.router;
+    // Only change history if the url has actually changed
+    if (this.props.href !== router.url) {
       // Do nothing on ctrl+click and the like
       if (
         e.ctrlKey ||
@@ -70,27 +27,20 @@ export default class Link extends Component<Props, State> {
       }
 
       e.preventDefault();
-
-      window.history.pushState({}, "foo", this.props.href);
-      window.dispatchEvent(new Event("popstate", { bubbles: true }));
-      window.scrollTo(0, 0);
-    } else if (this.state.external) {
-      window.location.href = this.props.href;
+      router.to(this.props.href);
     }
 
-    if (this.props.onClick !== undefined) {
-      this.props.onClick(e);
-    }
+    if (this.props.onClick) this.props.onClick(e);
   };
 
   render() {
     const { exact, href, children, activeClass, target } = this.props;
-    const { current } = this.state;
+    const current = this.context.router.url;
     const css = this.props.class || "";
 
     const active =
       (exact && href === current) || (!exact && current.startsWith(href))
-        ? " " + activeClass
+        ? " " + (activeClass || "")
         : "";
 
     return (

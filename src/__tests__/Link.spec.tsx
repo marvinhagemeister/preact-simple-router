@@ -1,9 +1,7 @@
 import { h, render } from "preact";
+import { mount } from "tiny-enzyme";
 import Link from "../Link";
 import { renderer } from "./helpers";
-import { mount } from "./enzyme";
-
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 describe("Link", () => {
   let counter = 0;

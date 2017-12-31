@@ -4,6 +4,7 @@
   "description": "Simple router for preact",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
+  "browser": "dist/browser.js",
   "types": "dist/es/index.d.ts",
   "author": "Marvin Hagemeister <marvin@marvinhagemeister.de>",
   "license": "MIT",
@@ -15,8 +16,7 @@
     "cleanup": "rimraf dist/",
     "lint": "tslint 'src/**/*.ts' 'src/**/*.tsx'",
     "watch": "tsc -p tsconfig.build.json -w",
-    "build":
-      "npm run cleanup && tsc -p tsconfig.build-cjs.json && tsc -p tsconfig.build-es.json",
+    "build": "npm run cleanup && tsc -p tsconfig.build-cjs.json && tsc -p tsconfig.build-es.json && rollup -c",
     "test": "tsc -p tsconfig.test.json && jest",
     "test-watch": "npm t -- --watch",
     "coverage": "npm t -- --coverage",
@@ -24,8 +24,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "preact-server-renderer": "^0.2.1",
-    "rlite-router": "^2.0.3"
+    "preact-server-renderer": "^0.2.1"
   },
   "devDependencies": {
     "@types/jest": "^21.1.4",
@@ -35,6 +34,10 @@
     "preact": "^8.2.6",
     "prettier": "^1.6.1",
     "rimraf": "^2.6.1",
+    "rollup": "^0.53.1",
+    "rollup-plugin-filesize": "^1.5.0",
+    "rollup-plugin-uglify-es": "^0.0.1",
+    "tiny-enzyme": "^0.0.4",
     "ts-jest": "^21.1.3",
     "ts-node": "^3.3.0",
     "tslint": "^5.7.0",

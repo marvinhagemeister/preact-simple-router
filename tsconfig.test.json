@@ -4,5 +4,5 @@
     "outDir": "./tmp",
     "noEmit": true
   },
-  "include": ["./typings", "./src/"]
+  "include": ["./src/"]
 }
