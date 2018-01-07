@@ -23,15 +23,14 @@
     "prepublishOnly": "npm run lint && npm t && npm run build",
     "precommit": "lint-staged"
   },
-  "dependencies": {
-    "preact-server-renderer": "^0.2.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^21.1.4",
     "husky": "^0.14.3",
     "jest": "^21.2.1",
     "lint-staged": "^4.0.4",
     "preact": "^8.2.6",
+    "preact-server-renderer": "^0.3.0",
     "prettier": "^1.6.1",
     "rimraf": "^2.6.1",
     "rollup": "^0.53.1",

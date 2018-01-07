@@ -1,10 +1,11 @@
 import { h, Component } from "preact";
+import { PROTOCOL_REG } from "./util";
 
 export interface Props {
   class?: string;
   target?: string;
   activeClass?: string;
-  onClick?: (e?: KeyboardEvent | MouseEvent) => void;
+  onClick?: (e: KeyboardEvent | MouseEvent, url: string) => void;
   href: string;
   children?: any;
   exact?: boolean;
@@ -27,10 +28,10 @@ export default class Link extends Component<Props, any> {
       }
 
       e.preventDefault();
-      router.to(this.props.href);
+      if (!PROTOCOL_REG.test(this.props.href)) router.to(this.props.href);
     }
 
-    if (this.props.onClick) this.props.onClick(e);
+    if (this.props.onClick) this.props.onClick(e, this.context.router.url);
   };
 
   render() {

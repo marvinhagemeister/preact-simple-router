@@ -2,69 +2,68 @@ import { h, render } from "preact";
 import { mount } from "tiny-enzyme";
 import Link from "../Link";
 import { renderer } from "./helpers";
+import { MemoryRouter } from "..";
+
+export function fakeEvent() {
+  return { button: 0, preventDefault: () => undefined };
+}
 
 describe("Link", () => {
-  let counter = 0;
-  const handler = () => counter++;
-
-  beforeEach(() => {
-    counter = 0;
-    window.addEventListener("popstate", handler);
-    Object.defineProperty(window.location, "href", {
-      writable: true,
-      value: "/",
-    });
-    Object.defineProperty(window.location, "origin", {
-      writable: true,
-      value: "http://localhost/",
-    });
-    Object.defineProperty(window.location, "hostname", {
-      writable: true,
-      value: "localhost",
-    });
-
-    window.history.pushState = (data: any, title: any, url?: any) => {
-      window.location.href = window.location.origin + url.slice(1);
-    };
-  });
-
-  afterEach(() => window.removeEventListener("popstate", handler));
-
   it("should navigate", () => {
-    const root = mount(<Link href="/foo" />).simulate("click");
+    const spy = jest.fn();
+    const router = new MemoryRouter({});
+    const c = new Link({ href: "/foo", onClick: spy }, { router });
+    const e = fakeEvent();
+    c.onClick(e as any);
 
-    expect(window.location.href).toEqual("http://localhost/foo");
-    expect(counter).toEqual(1);
+    expect(spy.mock.calls[0]).toEqual([e, "/foo/"]);
+    expect(router.url).toEqual("/foo/");
   });
 
   it("should navigate only if url is different", () => {
-    const root = mount(<Link href="/" />).simulate("click");
-
-    expect(window.location.href).toEqual("/");
-    expect(counter).toEqual(0);
+    const router = new MemoryRouter({});
+    const c = new Link({ href: "/" }, { router });
+    c.onClick(fakeEvent() as any);
+    expect(router.url).toEqual("/");
   });
 
   it("should not push to history if url is external", () => {
-    mount(<Link href="http://example.com" />).simulate("click");
-
-    expect(window.location.href).toEqual("http://example.com");
-    expect(counter).toEqual(0);
+    const router = new MemoryRouter({});
+    const c = new Link({ href: "https://example.com" }, { router });
+    c.onClick(fakeEvent() as any);
+    expect(router.url).toEqual("/");
+    expect(router.stack).toEqual(["/"]);
   });
 
   it("should render active class", () => {
-    const link = <Link href="/" class="foo" activeClass="bar" />;
+    const link = (
+      <MemoryRouter>
+        <Link href="/" class="foo" activeClass="bar" />
+      </MemoryRouter>
+    );
     expect(renderer(link)).toMatchSnapshot();
 
-    const link2 = <Link href="/foo" class="foo" activeClass="bar" />;
+    const link2 = (
+      <MemoryRouter>
+        <Link href="/foo" class="foo" activeClass="bar" />
+      </MemoryRouter>
+    );
     expect(renderer(link2)).toMatchSnapshot();
   });
 
   it("should render exact active class", () => {
-    const link = <Link href="/" class="foo" activeClass="bar" exact />;
+    const link = (
+      <MemoryRouter>
+        <Link href="/" class="foo" activeClass="bar" exact />
+      </MemoryRouter>
+    );
     expect(renderer(link)).toMatchSnapshot();
 
-    window.location.href = "/bob";
-    const link2 = <Link href="/bob/foo" class="foo" activeClass="bar" exact />;
+    const link2 = (
+      <MemoryRouter prefix="/bob">
+        <Link href="/bob/foo" class="foo" activeClass="bar" exact />
+      </MemoryRouter>
+    );
     expect(renderer(link2)).toMatchSnapshot();
   });
 });

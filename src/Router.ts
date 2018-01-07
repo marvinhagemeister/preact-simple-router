@@ -1,18 +1,18 @@
-import { Component } from "preact";
-import { Route } from "./Match";
+import { h, Component } from "preact";
+import { Route, MatchResult } from "./Match";
+import { mergeUrl } from "./util";
 
 export interface Router {
   to(url: string, scrollToTop?: boolean): void;
   go(n: number): void;
-  register(comp: any): () => void;
 }
 
-export interface BrowserProps {
+export interface RouterProps {
   prefix?: string;
   children?: any;
 }
 
-export class BrowserRouter extends Component<BrowserProps, any>
+export class BrowserRouter extends Component<RouterProps, any>
   implements Router {
   private routes: Route[] = [];
 
@@ -26,9 +26,9 @@ export class BrowserRouter extends Component<BrowserProps, any>
       const match = route.props.path(url);
       if (match !== null) {
         url = url.slice(match.matched.length);
-        route.setState({ params: match.params });
+        (route.setState as any)({ params: match.params });
       } else {
-        route.setState({ params: null });
+        (route.setState as any)({ params: null });
       }
     }
   };
@@ -36,14 +36,6 @@ export class BrowserRouter extends Component<BrowserProps, any>
   getUrl() {
     const url = window.location.href.replace(window.location.origin, "");
     return this.props.prefix ? url.slice(this.props.prefix.length) : url;
-  }
-
-  register(comp: any) {
-    this.routes.push(comp);
-    return () => {
-      const idx = this.routes.findIndex(comp);
-      this.routes = this.routes.splice(idx, 1);
-    };
   }
 
   to(url: string, scrollToTop: boolean = true) {
@@ -61,26 +53,41 @@ export class BrowserRouter extends Component<BrowserProps, any>
   }
 
   render() {
-    return this.props.children || null;
+    return h("div", null as any, this.props.children) || null;
   }
 }
 
 export class MemoryRouter extends BrowserRouter {
-  url: string = "";
-  stack: string[] = [];
+  url: string = "/";
+  stack: string[] = ["/"];
+
+  constructor(props: RouterProps) {
+    super(props);
+    this.componentWillReceiveProps(props);
+  }
 
   componentDidMount() {
     /* noop */
   }
 
+  componentWillReceiveProps(props: RouterProps) {
+    this.url = mergeUrl(this.url, "/", props.prefix);
+  }
+
+  getUrl() {
+    return this.url;
+  }
+
   to(url: string, scrollToTop: boolean = false) {
-    this.stack.push(url);
-    this.url = url;
+    this.url = mergeUrl(this.url, url, this.props.prefix);
+    this.stack.push(this.url);
     this.forceUpdate();
   }
 
   go(n: number) {
-    this.url = this.stack[n];
+    if (n === 0 || n > this.stack.length) return;
+    if (n < 0) n = this.stack.length + n - 1;
+    this.url = this.stack[n] || "/";
     this.forceUpdate();
   }
 }

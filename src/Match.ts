@@ -13,39 +13,41 @@ export interface Children {
 
 export interface Props extends Children {
   path: Matcher;
-  params?: Record<string, string>;
+  match?: MatchResult | null;
 }
 
 export interface State {
-  params: Record<string, string> | null;
+  match: MatchResult | null;
 }
 
 export class Route extends Component<Props, State> {
-  public state: State = { params: null };
-  private destroy: () => void = () => undefined;
+  public state: State = { match: null };
 
-  componentDidMount() {
-    this.destroy = this.context.router.register(this);
-  }
-
-  componentWillUnmount() {
-    this.destroy();
+  getChildContext() {
+    return {
+      ...this.context.router,
+      match: this.state.match,
+    };
   }
 
   render() {
-    return this.state.params ? this.props.children : null;
+    return this.state.match ? this.props.children : null;
   }
 }
 
-export function Switch(props: Children, context: any) {
-  for (const child of props.children as VNode[]) {
-    const params = child.attributes.path(context.router.url);
+export class Switch extends Route {
+  render() {
+    if (this.state.match !== null) {
+      for (const child of this.props.children) {
+        const match = child.attributes.path(this.context.router.url);
 
-    if (params !== null) {
-      child.attributes.params = params;
-      return child;
+        if (match !== null) {
+          child.attributes.match = match;
+          return child;
+        }
+      }
     }
-  }
 
-  return null;
+    return null;
+  }
 }

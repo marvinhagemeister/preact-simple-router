@@ -7,12 +7,12 @@
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-21.1.10.tgz#dcacb5217ddf997a090cc822bba219b4b2fd7984"
 
 "@types/node@^7.0.29":
-  version "7.0.51"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.51.tgz#1fb9bd2c7d28b1e8b1fe438f01494d0da8e451af"
+  version "7.0.52"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.52.tgz#8990d3350375542b0c21a83cd0331e6a8fc86716"
 
 "@types/node@^8.0.26":
-  version "8.5.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.2.tgz#83b8103fa9a2c2e83d78f701a9aa7c9539739aa5"
+  version "8.5.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.7.tgz#9c498c35af354dcfbca3790fb2e81129e93cf0e2"
 
 abab@^1.0.3:
   version "1.0.4"
@@ -2319,9 +2319,9 @@ pkg-dir@^2.0.0:
   dependencies:
     find-up "^2.1.0"
 
-preact-server-renderer@^0.2.1:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/preact-server-renderer/-/preact-server-renderer-0.2.3.tgz#2d58926a9ab4212aecbac1d5bfab7baae130015a"
+preact-server-renderer@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/preact-server-renderer/-/preact-server-renderer-0.3.0.tgz#feec4e41b234ccd0fb27d559d95bf0479a7e97eb"
   dependencies:
     "@types/node" "^8.0.26"
     vdom-utils "^0.3.1"
