@@ -51,6 +51,7 @@ describe("Route", () => {
       {
         absolute: false,
         matched: "foo/bar",
+        path: "foo/:name",
         params: {
           name: "bar",
         },
