@@ -15,6 +15,7 @@ describe("mergeUrl", () => {
   });
 
   it("should respect prefix", () => {
-    expect(mergeUrl("foo/", "/bar", "foobar.com")).toEqual("foobar.com/bar/");
+    expect(mergeUrl("foo/", "/bar", "foobar.com")).toEqual("/bar/");
+    expect(mergeUrl("foo/", "/foo", "bar/")).toEqual("/foo/");
   });
 });

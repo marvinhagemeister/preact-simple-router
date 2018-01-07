@@ -4,6 +4,7 @@ module.exports = {
       tsConfigFile: "tsconfig.test.json",
     },
   },
+  testURL: "http://localhost",
   transform: {
     "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js",
   },

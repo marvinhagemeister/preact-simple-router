@@ -25,10 +25,14 @@ export class BrowserRouter extends Component<RouterProps, any>
 
   getUrl() {
     const url = window.location.href.replace(window.location.origin, "");
-    return this.props.prefix ? url.slice(this.props.prefix.length) : url;
+    return mergeUrl("/", url, this.props.prefix);
   }
 
   to(url: string, scrollToTop: boolean = true) {
+    url = mergeUrl(this.url, url, this.props.prefix);
+
+    if (url === this.getUrl()) return;
+
     window.history.pushState({}, "", url);
     window.dispatchEvent(new Event("popstate", { bubbles: true }));
     if (scrollToTop) window.scrollTo(0, 0);

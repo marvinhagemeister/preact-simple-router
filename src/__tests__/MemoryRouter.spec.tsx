@@ -9,7 +9,7 @@ describe("MemoryRouter", () => {
 
   it("should allow prefix", () => {
     const router = new MemoryRouter({ prefix: "foo" });
-    expect(router.url).toEqual("foo/");
+    expect(router.url).toEqual("/");
   });
 
   it("should getUrl", () => {
@@ -29,5 +29,21 @@ describe("MemoryRouter", () => {
     expect(router.url).toEqual("/foo/");
     router.go(0);
     expect(router.url).toEqual("/foo/");
+  });
+
+  it("should route by relative url", () => {
+    const router = new MemoryRouter({});
+    router.to("foo");
+    expect(router.url).toEqual("/foo/");
+    router.to("bar");
+    expect(router.url).toEqual("/foo/bar/");
+  });
+
+  it("should route by absolute url", () => {
+    const router = new MemoryRouter({});
+    router.to("foo");
+    expect(router.url).toEqual("/foo/");
+    router.to("/bar");
+    expect(router.url).toEqual("/bar/");
   });
 });
