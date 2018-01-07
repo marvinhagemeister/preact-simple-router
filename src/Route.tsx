@@ -5,14 +5,9 @@ export interface Children {
   children?: VNode | any;
 }
 
-export interface MatchArg extends MatchResult {
-  absolute: boolean;
-  path: string;
-}
-
 export interface Props extends Children {
   path: string;
-  render?: (match: MatchArg, children: any) => any;
+  render?: (match: MatchResult, children: any) => any;
 }
 
 export interface State {
@@ -49,12 +44,7 @@ export class Route extends Component<Props, State> {
     if (this.state.match === null) return null;
 
     if (this.props.render) {
-      const arg = {
-        ...this.state.match,
-        absolute: this.pathReg.absolute,
-        path: this.props.path,
-      };
-      return this.props.render(arg, this.props.children);
+      return this.props.render(this.state.match, this.props.children);
     }
 
     return <div>{this.props.children}</div>;
