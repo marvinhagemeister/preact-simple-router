@@ -1,7 +1,7 @@
 import { h, Component } from "preact";
 import { PROTOCOL_REG } from "./util";
 
-export interface Props {
+export interface LinkProps {
   class?: string;
   target?: string;
   activeClass?: string;
@@ -11,7 +11,7 @@ export interface Props {
   exact?: boolean;
 }
 
-export default class Link extends Component<Props, any> {
+export default class Link extends Component<LinkProps, any> {
   onClick = (e: KeyboardEvent | MouseEvent) => {
     const router = this.context.router;
     // Only change history if the url has actually changed

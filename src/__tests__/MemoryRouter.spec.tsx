@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { MemoryRouter } from "../Router";
+import { MemoryRouter } from "../MemoryRouter";
 
 describe("MemoryRouter", () => {
   it("should set default url to /", () => {

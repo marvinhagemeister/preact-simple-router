@@ -1,6 +1,6 @@
 import { h, render } from "preact";
 import { mount } from "tiny-enzyme";
-import { MemoryRouter } from "../Router";
+import { MemoryRouter } from "../MemoryRouter";
 import { Route } from "../Route";
 
 describe("Route", () => {
