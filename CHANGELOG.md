@@ -1,33 +1,37 @@
 # Changelog
 
+## 0.0.8 (preview)
+
+* Preview release with a completely new api resembling `React-Router V4`
+
 ## 0.0.7
 
-- Add optional `onClick` handler for `Link`
+* Add optional `onClick` handler for `Link`
 
 ## 0.0.6
 
-- Fix scroll position not reset when clicking on a `Link`
+* Fix scroll position not reset when clicking on a `Link`
 
 ## 0.0.5
 
-- Mac: Fix `cmd + click` beeing incorrectly captured
+* Mac: Fix `cmd + click` beeing incorrectly captured
 
 ## 0.0.4
 
-- Fix TypeScript typings issue
+* Fix TypeScript typings issue
 
 ## 0.0.3 (Pre-Release)
 
-- Various router fixes
+* Various router fixes
 
 ## 0.0.2 (Pre-Release) Refactor
 
-- `<Link>` only pushes to history when link differs from url bar
-- `<Link>` respects external links
-- `<Link>` respects keyboard shortcuts like `ctrl+click`
-- Remove `preact-loadable` - we don't need it
-- Pass router parameters to routes :tada:
+* `<Link>` only pushes to history when link differs from url bar
+* `<Link>` respects external links
+* `<Link>` respects keyboard shortcuts like `ctrl+click`
+* Remove `preact-loadable` - we don't need it
+* Pass router parameters to routes :tada:
 
 ## 0.0.1
 
-- Pre-Release
+* Pre-Release
