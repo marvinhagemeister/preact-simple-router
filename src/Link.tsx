@@ -31,7 +31,7 @@ export default class Link extends Component<Props, any> {
       if (!PROTOCOL_REG.test(this.props.href)) router.to(this.props.href);
     }
 
-    if (this.props.onClick) this.props.onClick(e, this.context.router.url);
+    if (this.props.onClick) this.props.onClick(e, router.url);
   };
 
   render() {

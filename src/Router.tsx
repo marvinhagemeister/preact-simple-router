@@ -1,5 +1,6 @@
 import { h, Component } from "preact";
-import { Route, MatchResult } from "./Match";
+import { Route } from "./Match";
+import { MatchResult } from "@marvinh/path-to-regexp";
 import { mergeUrl } from "./util";
 
 export interface Router {
@@ -14,24 +15,13 @@ export interface RouterProps {
 
 export class BrowserRouter extends Component<RouterProps, any>
   implements Router {
-  private routes: Route[] = [];
+  public url: string = "/";
 
   componentDidMount() {
-    window.addEventListener("popstate", this.update);
+    window.addEventListener("popstate", () => {
+      this.url = this.getUrl();
+    });
   }
-
-  update = () => {
-    let url = this.getUrl();
-    for (const route of this.routes) {
-      const match = route.props.path(url);
-      if (match !== null) {
-        url = url.slice(match.matched.length);
-        (route.setState as any)({ params: match.params });
-      } else {
-        (route.setState as any)({ params: null });
-      }
-    }
-  };
 
   getUrl() {
     const url = window.location.href.replace(window.location.origin, "");
@@ -53,12 +43,11 @@ export class BrowserRouter extends Component<RouterProps, any>
   }
 
   render() {
-    return h("div", null as any, this.props.children) || null;
+    return <div>{this.props.children}</div> || null;
   }
 }
 
 export class MemoryRouter extends BrowserRouter {
-  url: string = "/";
   stack: string[] = ["/"];
 
   constructor(props: RouterProps) {

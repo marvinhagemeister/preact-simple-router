@@ -1,5 +1,4 @@
 import { h, render } from "preact";
-import { mount } from "tiny-enzyme";
 import Link from "../Link";
 import { renderer } from "./helpers";
 import { MemoryRouter } from "..";

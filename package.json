@@ -16,14 +16,17 @@
     "cleanup": "rimraf dist/",
     "lint": "tslint 'src/**/*.ts' 'src/**/*.tsx'",
     "watch": "tsc -p tsconfig.build.json -w",
-    "build": "npm run cleanup && tsc -p tsconfig.build-cjs.json && tsc -p tsconfig.build-es.json && rollup -c",
+    "build":
+      "npm run cleanup && tsc -p tsconfig.build-cjs.json && tsc -p tsconfig.build-es.json && rollup -c",
     "test": "tsc -p tsconfig.test.json && jest",
     "test-watch": "npm t -- --watch",
     "coverage": "npm t -- --coverage",
     "prepublishOnly": "npm run lint && npm t && npm run build",
     "precommit": "lint-staged"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@marvinh/path-to-regexp": "^0.0.2"
+  },
   "devDependencies": {
     "@types/jest": "^21.1.4",
     "husky": "^0.14.3",
