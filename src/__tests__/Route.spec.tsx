@@ -59,4 +59,12 @@ describe("Route", () => {
       ["Hello"],
     ]);
   });
+
+  it("should match exact", () => {
+    // TODO
+  });
+
+  it("should cache path", () => {
+    // TODO
+  });
 });

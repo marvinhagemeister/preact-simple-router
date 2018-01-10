@@ -1,3 +1,9 @@
+import { Router } from "./BrowserRouter";
+
+export interface Context {
+  router: Router;
+}
+
 export const PROTOCOL_REG = /^[a-z]+:\/\/(.*)$/g;
 
 export function mergeUrl(current: string, next: string, prefix?: string) {

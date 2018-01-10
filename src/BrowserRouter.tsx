@@ -4,6 +4,7 @@ import { Route } from "./Route";
 import { mergeUrl } from "./util";
 
 export interface Router {
+  url: string;
   to(url: string, scrollToTop?: boolean): void;
   go(n: number): void;
 }
