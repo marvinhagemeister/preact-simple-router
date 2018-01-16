@@ -51,4 +51,10 @@ describe("BrowserRouter", () => {
     router.to("/foo");
     expect(router.url).toEqual("/foo/");
   });
+
+  it("should keep functions when using Object.assign", () => {
+    const res = { router: { ...new BrowserRouter({}) } };
+    expect(typeof res.router.to).toEqual("function");
+    expect(typeof res.router.go).toEqual("function");
+  });
 });

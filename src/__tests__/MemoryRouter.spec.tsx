@@ -46,4 +46,10 @@ describe("MemoryRouter", () => {
     router.to("/bar");
     expect(router.url).toEqual("/bar/");
   });
+
+  it("should keep functions when using Object.assign", () => {
+    const res = { router: { ...new MemoryRouter({}) } };
+    expect(typeof res.router.to).toEqual("function");
+    expect(typeof res.router.go).toEqual("function");
+  });
 });

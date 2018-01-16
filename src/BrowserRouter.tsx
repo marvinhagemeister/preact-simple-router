@@ -5,8 +5,8 @@ import { mergeUrl } from "./util";
 
 export interface Router {
   url: string;
-  to(url: string, scrollToTop?: boolean): void;
-  go(n: number): void;
+  to: (url: string, scrollToTop?: boolean) => void;
+  go: (n: number) => void;
 }
 
 export interface RouterProps {
@@ -29,7 +29,7 @@ export class BrowserRouter extends Component<RouterProps, any>
     return mergeUrl("/", url, this.props.prefix);
   }
 
-  to(url: string, scrollToTop: boolean = true) {
+  to = (url: string, scrollToTop: boolean = true) => {
     url = mergeUrl(this.url, url, this.props.prefix);
 
     if (url === this.getUrl()) return;
@@ -37,11 +37,11 @@ export class BrowserRouter extends Component<RouterProps, any>
     window.history.pushState({}, "", url);
     window.dispatchEvent(new Event("popstate", { bubbles: true }));
     if (scrollToTop) window.scrollTo(0, 0);
-  }
+  };
 
-  go(n: number) {
+  go = (n: number) => {
     return window.history.go(n);
-  }
+  };
 
   getChildContext() {
     return { router: this as any };

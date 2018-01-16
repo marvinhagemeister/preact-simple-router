@@ -21,16 +21,16 @@ export class MemoryRouter extends BrowserRouter {
     return this.url;
   }
 
-  to(url: string, scrollToTop: boolean = false) {
+  to = (url: string, scrollToTop: boolean = false) => {
     this.url = mergeUrl(this.url, url, this.props.prefix);
     this.stack.push(this.url);
     this.forceUpdate();
-  }
+  };
 
-  go(n: number) {
+  go = (n: number) => {
     if (n === 0 || n > this.stack.length) return;
     if (n < 0) n = this.stack.length + n - 1;
     this.url = this.stack[n] || "/";
     this.forceUpdate();
-  }
+  };
 }
