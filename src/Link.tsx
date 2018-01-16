@@ -11,7 +11,7 @@ export interface LinkProps {
   exact?: boolean;
 }
 
-export default class Link extends Component<LinkProps, any> {
+export class Link extends Component<LinkProps, any> {
   onClick = (e: KeyboardEvent | MouseEvent) => {
     const router = this.context.router;
     // Only change history if the url has actually changed

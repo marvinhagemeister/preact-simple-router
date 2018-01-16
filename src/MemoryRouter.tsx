@@ -14,23 +14,24 @@ export class MemoryRouter extends BrowserRouter {
   }
 
   componentWillReceiveProps(props: RouterProps) {
-    this.url = mergeUrl(this.url, "/", props.prefix);
+    const url = mergeUrl(this.state.url, "/", props.prefix);
+    this.setState({ url });
   }
 
   getUrl() {
-    return this.url;
+    return this.state.url;
   }
 
   to = (url: string, scrollToTop: boolean = false) => {
-    this.url = mergeUrl(this.url, url, this.props.prefix);
-    this.stack.push(this.url);
+    this.state.url = mergeUrl(this.state.url, url, this.props.prefix);
+    this.stack.push(this.state.url);
     this.forceUpdate();
   };
 
   go = (n: number) => {
     if (n === 0 || n > this.stack.length) return;
     if (n < 0) n = this.stack.length + n - 1;
-    this.url = this.stack[n] || "/";
+    this.state.url = this.stack[n] || "/";
     this.forceUpdate();
   };
 }

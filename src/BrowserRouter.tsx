@@ -4,7 +4,6 @@ import { Route } from "./Route";
 import { mergeUrl } from "./util";
 
 export interface Router {
-  url: string;
   to: (url: string, scrollToTop?: boolean) => void;
   go: (n: number) => void;
 }
@@ -14,13 +13,25 @@ export interface RouterProps {
   children?: any;
 }
 
-export class BrowserRouter extends Component<RouterProps, any>
+export interface RouterState {
+  url: string;
+}
+
+export class BrowserRouter extends Component<RouterProps, RouterState>
   implements Router {
-  public url: string = "/";
+  public state: RouterState;
+
+  constructor(props: RouterProps) {
+    super(props);
+
+    this.state = {
+      url: "/",
+    };
+  }
 
   componentDidMount() {
     window.addEventListener("popstate", () => {
-      this.url = this.getUrl();
+      this.setState({ url: this.getUrl() });
     });
   }
 
@@ -30,7 +41,7 @@ export class BrowserRouter extends Component<RouterProps, any>
   }
 
   to = (url: string, scrollToTop: boolean = true) => {
-    url = mergeUrl(this.url, url, this.props.prefix);
+    url = mergeUrl(this.state.url, url, this.props.prefix);
 
     if (url === this.getUrl()) return;
 
@@ -44,7 +55,7 @@ export class BrowserRouter extends Component<RouterProps, any>
   };
 
   getChildContext() {
-    return { router: this as any };
+    return { router: { ...(this as any), url: this.state.url } };
   }
 
   render() {
