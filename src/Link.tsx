@@ -13,7 +13,9 @@ export interface LinkProps {
 
 export class Link extends Component<LinkProps, any> {
   onClick = (e: KeyboardEvent | MouseEvent) => {
+    e.preventDefault();
     const router = this.context.router;
+
     // Only change history if the url has actually changed
     if (this.props.href !== router.url) {
       // Do nothing on ctrl+click and the like
@@ -27,8 +29,7 @@ export class Link extends Component<LinkProps, any> {
         return;
       }
 
-      e.preventDefault();
-      if (!PROTOCOL_REG.test(this.props.href)) router.to(this.props.href);
+      router.to(this.props.href);
     }
 
     if (this.props.onClick) this.props.onClick(e, router.url);

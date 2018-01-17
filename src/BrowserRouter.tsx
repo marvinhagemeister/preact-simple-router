@@ -29,10 +29,15 @@ export class BrowserRouter extends Component<RouterProps, RouterState>
     };
   }
 
+  update = () => this.setState({ url: this.getUrl() });
+
   componentDidMount() {
-    window.addEventListener("popstate", () => {
-      this.setState({ url: this.getUrl() });
-    });
+    this.update();
+    window.addEventListener("popstate", this.update);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("popstate", this.update);
   }
 
   getUrl() {

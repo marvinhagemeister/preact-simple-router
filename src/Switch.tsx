@@ -1,7 +1,7 @@
 import { h, VNode } from "preact";
 import { PathRegExp, MatchResult } from "@marvinh/path-to-regexp";
 import { Route, cache } from "./Route";
-import { Context, matches } from "./util";
+import { Context } from "./util";
 
 export interface SwitchProps {
   children?: VNode[];
@@ -17,8 +17,9 @@ export function Switch(props: SwitchProps, context: Context) {
     }
 
     const pathReg = cache.get(path) as PathRegExp;
-    const match = matches(pathReg, context.router.url, exact);
-    if (match.result) {
+    const match = pathReg.match(context.router.url, exact);
+    child.attributes.match = match;
+    if (match !== null) {
       return <div>{child}</div>;
     }
   }

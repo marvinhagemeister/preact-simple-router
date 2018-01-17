@@ -8,7 +8,7 @@ export interface Context {
 export const PROTOCOL_REG = /^[a-z]+:\/\/(.*)$/g;
 
 export function mergeUrl(current: string, next: string, prefix?: string) {
-  if (!next.endsWith("/")) next = next + "/";
+  if (next.length > 1 && !next.endsWith("/")) next = next + "/";
   if (prefix) current = current.replace(prefix, "");
   if (next.startsWith("/")) {
     if (prefix) next = next.replace(prefix, "");
@@ -17,16 +17,4 @@ export function mergeUrl(current: string, next: string, prefix?: string) {
   }
 
   return next;
-}
-
-export function matches(
-  pathReg: PathRegExp,
-  url: string,
-  exact: boolean = false,
-) {
-  const match = pathReg.match(url);
-  return {
-    match,
-    result: match !== null && ((exact && match.matched === "") || !exact),
-  };
 }

@@ -1,6 +1,6 @@
 import { h, Component, VNode } from "preact";
 import { PathRegExp, MatchResult } from "@marvinh/path-to-regexp";
-import { Context, matches } from "./util";
+import { Context } from "./util";
 
 export interface Children {
   children?: VNode | any;
@@ -10,11 +10,11 @@ export interface RouteProps extends Children {
   path: string;
   exact?: boolean;
   render?: (match: MatchResult, children: any) => any;
+  match?: MatchResult;
 }
 
 export interface State {
   match: MatchResult | null;
-  alreadyMatched: boolean;
 }
 
 export const cache = new Map<string, PathRegExp>();
@@ -32,21 +32,14 @@ export class Route extends Component<RouteProps, State> {
     this.pathReg = cache.get(props.path) as PathRegExp;
     this.state = {
       match: this.pathReg.match(context.router.url),
-      alreadyMatched: false,
     };
   }
 
   componentWillUpdate() {
-    if (this.state.alreadyMatched) return;
-
-    const match = matches(
-      this.pathReg,
-      this.context.router.url,
-      this.props.exact,
-    );
-    if (match.result) {
-      this.setState({ match: match.match });
-    }
+    const match =
+      this.props.match ||
+      this.pathReg.match(this.context.router.url, this.props.exact);
+    this.setState({ match });
   }
 
   getChildContext() {

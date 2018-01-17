@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@marvinh/path-to-regexp@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@marvinh/path-to-regexp/-/path-to-regexp-0.0.3.tgz#f43dae19f9620ff1e87bdb954d552aa95783e022"
+"@marvinh/path-to-regexp@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@marvinh/path-to-regexp/-/path-to-regexp-0.0.4.tgz#d1fbcd8bd11859ffcacc769fbf8e6b5f6126d1c9"
 
 "@types/jest@^21.1.4":
   version "21.1.10"

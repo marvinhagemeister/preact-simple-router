@@ -25,7 +25,7 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "@marvinh/path-to-regexp": "^0.0.3"
+    "@marvinh/path-to-regexp": "^0.0.5"
   },
   "devDependencies": {
     "@types/jest": "^21.1.4",
