@@ -13,6 +13,10 @@ export class MemoryRouter extends BrowserRouter {
     /* noop */
   }
 
+  componentWillUnmount() {
+    /* noop */
+  }
+
   componentWillReceiveProps(props: RouterProps) {
     const url = mergeUrl(this.state.url, "/", props.prefix);
     this.setState({ url });
